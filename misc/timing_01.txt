@@ -1,0 +1,1138 @@
+size     iter       time                    comment
+--------------------------------------------------------------
+40 		 1000 		 1.569   6 trivial lattice nn 
+
+40 		 1000 		 1.593   6 trivial lattice nn 
+
+40 		 1000 		 1.554     
+
+20 		 1000 		 0.633   test row 
+
+20 		 1000 		 0.663   test row 
+
+30 		 1000 		 1.316   test row 
+
+40 		 1000 		 2.202   test row 
+
+50 		 1000 		 3.024   test row 
+
+60 		 1000 		 4.070   test row 
+
+70 		 1000 		 4.959   test row 
+
+80 		 1000 		 5.992   test row 
+
+90 		 1000 		 6.632   test row 
+
+100 	 1000 		 7.463   test row 
+
+20 		 100000 	 18.71   test row 
+
+30 		 100000 	 60.30   test row 
+
+40 		 100000 	 233.6   test row 
+
+50 		 100000 	 635.2   test row 
+
+60 		 100000 	 2535.   test row 
+
+70 		 100000 	 6259.   test row 
+
+10 		 10 		 0.078   checking for runabilty 
+
+50 		 10000 		 20.14   checking for runabilty 
+
+40 		 1000 		 1.836   checking for runabilty 
+
+40 		 1000 		 1.349   checking for runabilty 
+
+40 		 1000 		 1.361   python 2.7 test 
+
+60 		 100000 	 786.9   python 2.7 test @uni 
+
+50 		 10000 		 23.78   twin planes test @uni 
+
+50 		 100 		 2.032   twin planes test @uni 
+
+50 		 100 		 1.787   twin planes test @uni 
+
+50 		 100 		 1.680   twin planes test @uni 
+
+50 		 100 		 1.581   twin planes test @uni 
+
+50 		 100 		 5.517   twin planes test @uni 
+
+50 		 100 		 5.586   twin planes test @uni 
+
+50 		 0   		 5.475 	 twin planes test @uni 
+
+20 		 0 	    	 0.364 	 twin planes test @uni 
+
+20 		 0 		     0.434 	 twin planes test @uni 
+
+20 		 100 		 0.475 	 twin planes test @uni 
+
+20 		 100 		 0.443 	 twin planes test @uni 
+
+20 		 10 		 0.426 	 twin planes test @uni 
+
+20 		 0   		 0.469   status march2014 
+
+40 		 1000 		 3.878 	 status march2014 
+
+40 		 1000 		 3.978 	 status march2014 
+
+40 		 1000 		 3.783 	 status march2014 
+
+40 		 1000 		 3.705	 status march2014 
+
+40 		 1000 		 4.784 	 status march2014 
+
+40 		 10 		 4.412 	 status march2014 
+
+40 		 10 		 4.418 	 status march2014 
+
+40 		 10 		 4.426 	 status march2014 
+
+40 		 10 		 4.546 	 status march2014 
+
+40 		 10 		 4.582 	 status march2014 
+
+40 		 0 	    	 4.649	 status march2014 
+
+40 		 0 	    	 4.572   status march2014 
+
+40 		 0 	    	 4.598   status march2014 
+
+40 		 0 	    	 4.885	 status march2014 
+
+40 		 0 	    	 5.089	 status march2014 
+
+40 		 0 	    	 5.288	 status march2014 
+
+40 		 0 	    	 4.408	 status march2014 
+
+40 		 0 	    	 4.386	 status march2014 
+
+40 		 0 	    	 4.318   status march2014 
+
+20 		 0 	    	 0.537 	 status march2014 
+
+20 		 0 	    	 0.552 	 status march2014 
+
+20 		 0 	    	 0.657 	 status march2014 
+
+20 		 0 	    	 0.676 	 status march2014 
+
+20 		 0 	    	 0.510 	 status march2014 
+
+20 		 0 	    	 0.499 	 status march2014 
+
+20 		 0 	    	 0.515 	 status march2014 
+
+20 		 0 	    	 0.495 	 status march2014 
+
+20 		 0 	    	 0.655 	 status march2014 
+
+20 		 0 	    	 0.630 	 status march2014 
+
+20 		 0 	    	 0.612 	 status march2014 
+
+20 		 0 	    	 0.401 	 status march2014 
+
+20 		 0 	    	 0.409 	 status march2014 
+
+20 		 0 	    	 0.456 	 status march2014 
+
+20 		 0 	    	 0.604 	 status march2014 
+
+20 		 0 	    	 0.843 	 status march2014 
+
+20 		 0 	    	 0.844 	 status march2014 
+
+40 		 0 	    	 4.629 	 status march2014 
+
+40 		 0 	    	 4.374 	 status march2014 
+
+40 		 0 	    	 4.229 	 status march2014 
+
+40 		 0 	    	 4.582 	 status march2014 
+
+20 		 0 	    	 0.695   status march2014 
+
+20 		 0 	    	 0.693   status march2014 
+
+20 		 0 	    	 0.693   status march2014 
+
+20 		 0 	    	 0.693   status march2014 
+
+25 		 0 	    	 1.754 	 status march2014 
+
+25 		 0 	    	 1.793 	 status march2014 
+
+25 		 0 	    	 1.773 	 status march2014 
+
+25 		 0 	    	 1.770 	 status march2014 
+
+25 		 0 	    	 1.377 	 status march2014 
+
+25 		 0 	    	 0.707 	 status march2014 
+
+35 		 1000 		 2.381 	 status march2014 
+
+35 		 1000 		 2.347 	 status march2014 
+
+35 		 1000 		 2.398	 status march2014 
+
+35 		 1000 		 2.376 	 status march2014 
+
+35 		 1000 		 2.463	 status march2014 
+
+40 		 10000 		 20.85 	 status march2014 
+
+30 		 100 		 1.22 	 status march2014 
+
+30 		 100 		 1.228 	 status march2014 
+
+30 		 100 		 1.187 	 twin planes completed 
+
+100 	 100 		 39.569  twin planes completed 
+
+20 		 100 		 0.455 	 twin planes completed 
+
+20 		 100 		 0.465 	 twin planes completed 
+
+20 		 100 		 0.462 	 twin planes completed 
+
+20 		 100 		 0.465 	 twin planes completed 
+
+20 		 100 		 0.460 	 twin planes completed 
+
+20 		 100 		 0.459 	 twin planes completed 
+
+20 		 100 		 0.453 	 twin planes completed 
+
+20 		 100 		 0.420 	 twin planes completed 
+
+20 		 100 		 0.433 	 twin planes completed 
+
+20 		 100 		 0.430 	 twin planes completed 
+
+20 		 100 		 0.442 	 twin planes completed 
+
+20 		 100 		 0.419 	 twin planes completed 
+
+20 		 100 		 0.434 	 twin planes completed 
+
+20 		 100 		 0.464 	 twin planes completed 
+
+20 		 100 		 0.460 	 twin planes completed 
+
+20 		 100 		 0.507 	 twin planes completed 
+
+20 		 100 		 0.510 	 twin planes completed 
+
+20 		 100 		 0.566 	 twin planes completed 
+
+20 		 100 		 0.569 	 twin planes completed 
+
+20 		 100 		 0.560 	 twin planes completed 
+
+20 		 100 		 0.592 	 twin planes completed 
+
+20 		 100 		 0.593 	 twin planes completed 
+
+40 		 10000 		 22.992  twin planes completed 
+
+40 		 1000 		 3.788 	 twin planes completed 
+
+40 		 1000 		 3.747 	 twin planes completed 
+
+40 		 1000 		 3.722 	 twin planes completed 
+
+40 		 1000 		 3.758 	 twin planes completed 
+
+40 		 1000 		 3.702 	 twin planes completed 
+
+40 		 10 		 3.153 	 twin planes completed 
+
+40 		 10 		 3.188 	 twin planes completed 
+
+40 		 10 		 3.180 	 twin planes completed 
+
+40 		 1000 		 3.779 	 twin planes completed 
+
+40 		 1000 		 3.395 	 twin planes completed 
+
+20 		 1000 		 0.782 	 twin planes completed 
+
+20 		 1000 		 0.831 	 twin planes completed 
+
+10 		 1000 		 0.281 	 twin planes completed 
+
+20 		 1000 		 0.787 	 twin planes completed 
+
+20 		 1000 		 0.805 	 twin planes completed 
+
+20 		 1000 		 1.038 	 twin planes completed 
+
+20 		 1000 		 1.096 	 twin planes completed 
+
+20 		 1000 		 1.245 	 twin planes completed 
+
+20 		 1000 		 1.216 	 twin planes completed 
+
+20 		 1000 		 1.189 	 twin planes completed 
+
+20 		 1000 		 1.348 	 twin planes completed 
+
+20 		 1000 		 1.288 	 twin planes completed 
+
+20 		 1000 		 1.246 	 twin planes completed 
+
+20 		 1000 		 1.745 	 twin planes completed 
+
+20 		 10 		 0.396 	 twin planes completed 
+
+20 		 100 		 0.453 	 twin planes completed 
+
+20 		 100 		 0.608 	 twin planes completed 
+
+20 		 100 		 0.608 	 twin planes completed 
+
+20 		 100 		 0.472 	 twin planes completed 
+
+20 		 100 		 0.456 	 twin planes completed 
+
+20 		 100 		 0.454 	 twin planes completed 
+
+20 		 100 		 0.458 	 twin planes completed 
+
+20 		 100 		 0.452 	 twin planes completed 
+
+20 		 100 		 0.457 	 twin planes completed 
+
+20 		 100 		 0.450 	 twin planes completed 
+
+20 		 100 		 0.453 	 twin planes completed 
+
+20 		 100 		 0.450 	 twin planes completed 
+
+20 		 100 		 0.454 	 twin planes completed 
+
+20 		 100 		 0.451 	 twin planes completed 
+
+20 		 100 		 0.456 	 twin planes completed 
+
+20 		 100 		 0.448 	 twin planes completed 
+
+20 		 100 		 0.447 	 twin planes completed 
+
+20 		 10 		 0.403 	 twin planes completed 
+
+20 		 10 		 0.391 	 twin planes completed 
+
+20 		 10 		 0.394 	 twin planes completed 
+
+20 		 10 		 0.399 	 twin planes completed 
+
+20 		 100 		 0.446 	 twin planes completed 
+
+20 		 100 		 0.458 	 twin planes completed 
+
+20 		 100 		 0.449 	 twin planes completed 
+
+20 		 100 		 0.610 	 twin planes completed 
+
+20 		 100 		 0.447 	 twin planes completed 
+
+20 		 100 		 0.447 	 twin planes completed 
+
+20 		 100 		 0.609 	 twin planes completed 
+
+20 		 100 		 0.446 	 twin planes completed 
+
+20 		 100 		 0.612 	 twin planes completed 
+
+20 		 100 		 0.454 	 twin planes completed 
+
+20 		 100 		 0.629 	 twin planes completed 
+
+20 		 100 		 0.437 	 twin planes completed 
+
+20 		 1000 		 1.677 	 twin planes completed 
+
+20 		 1000 		 4.431 	 twin planes completed 
+
+20 		 1000 		 4.360 	 twin planes completed 
+
+20 		 1000 		 4.464 	 twin planes completed 
+
+20 		 1000 		 4.413 	 twin planes completed 
+
+40 		 100 		 3.237 	 twin planes completed 
+
+40 		 100 		 3.237 	 twin planes completed 
+
+40 		 100 		 3.812 	 twin planes completed 
+
+30 		 1000 		 11.190 	 twin planes completed 
+
+30 		 1000 		 14.016 	 twin planes completed 
+
+30 		 5000 		 193.835 	 twin planes completed 
+
+30 		 0 		 1.309 	 twin planes completed 
+
+30 		 100 		 1.683 	 probabilty dependant on attaches 
+
+30 		 100 		 1.619 	 probabilty dependant on attaches 
+
+30 		 1000 		 10.726 	 probabilty dependant on attaches 
+
+30 		 0 		 1.264 	 probabilty dependant on attaches 
+
+30 		 0 		 1.277 	 probabilty dependant on attaches 
+
+30 		 0 		 1.291 	 probabilty dependant on attaches 
+
+30 		 1000 		 10.777 	 probabilty dependant on attaches 
+
+30 		 1000 		 8.976 	 probabilty dependant on attaches 
+
+30 		 1000 		 9.912 	 probabilty dependant on attaches 
+
+30 		 1000 		 47.696 	 probabilty dependant on attaches 
+
+30 		 0 		 1.386 	 probabilty dependant on attaches 
+
+30 		 0 		 1.398 	 probabilty dependant on attaches 
+
+30 		 100 		 2.469 	 probabilty dependant on attaches 
+
+30 		 300 		 6.977 	 probabilty dependant on attaches 
+
+30 		 500 		 14.957 	 probabilty dependant on attaches 
+
+30 		 1000 		 47.387 	 probabilty dependant on attaches 
+
+30 		 0 		 1.676 	 probabilty dependant on attaches 
+
+30 		 100 		 3.084 	 probabilty dependant on attaches 
+
+30 		 0 		 1.672 	 probabilty dependant on attaches 
+
+30 		 100 		 3.059 	 probabilty dependant on attaches 
+
+30 		 300 		 9.318 	 probabilty dependant on attaches 
+
+30 		 500 		 19.966 	 probabilty dependant on attaches 
+
+30 		 1000 		 64.598 	 probabilty dependant on attaches 
+
+30 		 0 		 1.689 	 probabilty dependant on attaches 
+
+30 		 100 		 3.058 	 probabilty dependant on attaches 
+
+30 		 300 		 9.148 	 probabilty dependant on attaches 
+
+30 		 500 		 20.023 	 probabilty dependant on attaches 
+
+30 		 1000 		 64.335 	 probabilty dependant on attaches 
+
+30 		 0 		 1.393 	 probabilty dependant on attaches 
+
+30 		 100 		 2.401 	 probabilty dependant on attaches 
+
+30 		 300 		 6.913 	 probabilty dependant on attaches 
+
+30 		 500 		 15.072 	 probabilty dependant on attaches 
+
+30 		 1000 		 47.652 	 probabilty dependant on attaches 
+
+30 		 0 		 1.399 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 2.380 	 Base=5 probabilty dependant on attaches 
+
+30 		 300 		 6.812 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 14.615 	 Base=5 probabilty dependant on attaches 
+
+30 		 1000 		 47.248 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.469 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 2.525 	 Base=5 probabilty dependant on attaches 
+
+30 		 300 		 7.179 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 14.922 	 Base=5 probabilty dependant on attaches 
+
+30 		 1000 		 47.781 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.688 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 3.025 	 Base=5 probabilty dependant on attaches 
+
+30 		 300 		 8.971 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 19.538 	 Base=5 probabilty dependant on attaches 
+
+30 		 1000 		 63.650 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.680 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 3.087 	 Base=5 probabilty dependant on attaches 
+
+30 		 300 		 9.292 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.414 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 2.459 	 Base=5 probabilty dependant on attaches 
+
+30 		 300 		 7.072 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 14.684 	 Base=5 probabilty dependant on attaches 
+
+30 		 1000 		 47.748 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.414 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 2.457 	 Base=5 probabilty dependant on attaches 
+
+30 		 300 		 7.036 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 14.623 	 Base=5 probabilty dependant on attaches 
+
+30 		 1000 		 46.039 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.378 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 2.436 	 Base=5 probabilty dependant on attaches 
+
+30 		 300 		 6.755 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 14.780 	 Base=5 probabilty dependant on attaches 
+
+30 		 1000 		 46.179 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.391 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 2.464 	 Base=5 probabilty dependant on attaches 
+
+30 		 300 		 7.034 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 14.796 	 Base=5 probabilty dependant on attaches 
+
+30 		 1000 		 46.173 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.391 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 2.460 	 Base=5 probabilty dependant on attaches 
+
+30 		 300 		 6.987 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 14.520 	 Base=5 probabilty dependant on attaches 
+
+30 		 1000 		 45.257 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.405 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 2.542 	 Base=5 probabilty dependant on attaches 
+
+30 		 300 		 6.868 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 14.521 	 Base=5 probabilty dependant on attaches 
+
+30 		 1000 		 45.288 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.399 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 2.444 	 Base=5 probabilty dependant on attaches 
+
+30 		 300 		 6.995 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 14.751 	 Base=5 probabilty dependant on attaches 
+
+30 		 1000 		 43.967 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.416 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 2.471 	 Base=5 probabilty dependant on attaches 
+
+30 		 300 		 6.855 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 14.482 	 Base=5 probabilty dependant on attaches 
+
+30 		 1000 		 46.013 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.452 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 2.466 	 Base=5 probabilty dependant on attaches 
+
+30 		 300 		 6.935 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 14.652 	 Base=5 probabilty dependant on attaches 
+
+30 		 1000 		 43.812 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.388 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 2.456 	 Base=5 probabilty dependant on attaches 
+
+30 		 300 		 6.832 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 14.247 	 Base=5 probabilty dependant on attaches 
+
+30 		 1000 		 43.984 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.426 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.393 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 2.523 	 Base=5 probabilty dependant on attaches 
+
+30 		 300 		 6.881 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 14.609 	 Base=5 probabilty dependant on attaches 
+
+30 		 1000 		 42.521 	 Base=5 probabilty dependant on attaches 
+
+30 		 10 		 1.476 	 Base=5 probabilty dependant on attaches 
+
+30 		 10 		 1.493 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 14.646 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 13.081 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 12.511 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 13.079 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 12.888 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 2.398 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 2.355 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.441 	 Base=5 probabilty dependant on attaches 
+
+30 		 100 		 2.350 	 Base=5 probabilty dependant on attaches 
+
+30 		 300 		 6.200 	 Base=5 probabilty dependant on attaches 
+
+30 		 500 		 12.745 	 Base=5 probabilty dependant on attaches 
+
+30 		 1000 		 37.755 	 Base=5 probabilty dependant on attaches 
+
+30 		 0 		 1.446 	 Base=1.5 probabilty dependant on attaches 
+
+30 		 100 		 2.403 	 Base=1.5 probabilty dependant on attaches 
+
+30 		 300 		 6.486 	 Base=1.5 probabilty dependant on attaches 
+
+30 		 500 		 12.241 	 Base=1.5 probabilty dependant on attaches 
+
+30 		 1000 		 38.637 	 Base=1.5 probabilty dependant on attaches 
+
+30 		 0 		 1.413 	 Base=1.5 probabilty dependant on attaches 
+
+30 		 100 		 2.368 	 Base=1.5 probabilty dependant on attaches 
+
+30 		 300 		 6.330 	 Base=1.5 probabilty dependant on attaches 
+
+30 		 500 		 12.765 	 Base=1.5 probabilty dependant on attaches 
+
+30 		 1000 		 37.957 	 Base=1.5 probabilty dependant on attaches 
+
+30 		 0 		 1.396 	 Base=5 attach_prob, big iters 
+
+30 		 100 		 2.336 	 Base=5 attach_prob, big iters 
+
+30 		 300 		 6.511 	 Base=5 attach_prob, big iters 
+
+30 		 500 		 13.035 	 Base=5 attach_prob, big iters 
+
+30 		 1000 		 41.775 	 Base=5 attach_prob, big iters 
+
+30 		 2000 		 147.664 	 Base=5 attach_prob, big iters 
+
+30 		 5000 		 861.249 	 Base=5 attach_prob, big iters 
+
+30 		 0 		 1.409 	 Base=5 attach_prob, big iters 
+
+30 		 100 		 2.354 	 Base=5 attach_prob, big iters 
+
+30 		 300 		 6.309 	 Base=5 attach_prob, big iters 
+
+30 		 500 		 13.340 	 Base=5 attach_prob, big iters 
+
+30 		 1000 		 41.914 	 Base=5 attach_prob, big iters 
+
+30 		 2000 		 143.696 	 Base=5 attach_prob, big iters 
+
+50 		 0 		 6.126 	 Base=5 attach_prob, big iters 
+
+50 		 100 		 6.917 	 Base=5 attach_prob, big iters 
+
+50 		 300 		 10.811 	 Base=5 attach_prob, big iters 
+
+50 		 500 		 17.786 	 Base=5 attach_prob, big iters 
+
+50 		 1000 		 46.686 	 Base=5 attach_prob, big iters 
+
+50 		 2000 		 149.818 	 Base=5 attach_prob, big iters 
+
+50 		 5000 		 834.439 	 Base=5 attach_prob, big iters 
+
+50 		 10000 		 3065.547 	 Base=5 attach_prob, big iters 
+
+50 		 500 		 17.915 	 Base=5 attach_prob, big iters 
+
+50 		 500 		 18.286 	 Base=5 attach_prob, big iters 
+
+50 		 500 		 18.250 	 Base=5 attach_prob, big iters 
+
+30 		 500 		 13.498 	 Base=5 attach_prob, big iters 
+
+30 		 500 		 13.535 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 14.728 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 14.991 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 16.126 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 16.692 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 17.120 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 16.433 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 15.273 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 15.137 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 15.397 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 15.504 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 15.622 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 15.232 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 15.564 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 14.746 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 15.139 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 15.513 	 Base=5 attach_prob, big iters 
+
+40 		 500 		 9.773 	 Base=5 attach_prob, big iters 
+
+40 		 1000 		 25.215 	 Base=5 attach_prob, big iters 
+
+40 		 1000 		 22.799 	 Base=5 attach_prob, big iters 
+
+40 		 1000 		 22.442 	 Base=5 attach_prob, big iters 
+
+40 		 5000 		 449.179 	 Base=5 attach_prob, big iters 
+
+40 		 100 		 3.454 	 Base=5 attach_prob, big iters 
+
+40 		 0 		 3.070 	 Base=5 attach_prob, big iters 
+
+40 		 10000 		 1742.501 	 Base=5 attach_prob, big iters 
+
+40 		 10 		 3.264 	 Base=5 attach_prob, big iters 
+
+40 		 10 		 3.861 	 Base=5 attach_prob, big iters 
+
+40 		 100 		 7.229 	 Base=5 attach_prob, big iters 
+
+40 		 0 		 3.691 	 Base=5 new diag NN 
+
+40 		 0 		 3.630 	 Base=5 new diag NN 
+
+40 		 100 		 7.655 	 Base=5 new diag NN 
+
+40 		 300 		 20.630 	 Base=5 new diag NN 
+
+40 		 500 		 41.731 	 Base=5 new diag NN 
+
+40 		 1000 		 148.558 	 Base=5 new diag NN 
+
+40 		 2000 		 575.981 	 Base=5 new diag NN 
+
+40 		 5000 		 2793.823 	 Base=5 new diag NN 
+
+40 		 10000 		 14115.419 	 Base=5 new diag NN 
+
+30 		 100 		 10.516 	 Base=4 new diag NN 
+
+10 		 1 		 0.822 	 Base=4 new diag NN 
+
+10 		 1 		 0.768 	 Base=4 new diag NN 
+
+10 		 1 		 0.806 	 Base=4 new diag NN 
+
+10 		 1 		 0.743 	 Base=4 new diag NN 
+
+10 		 1 		 0.734 	 Base=4 new diag NN 
+
+30 		 1000 		 132.145 	 Base=4 new diag NN 
+
+30 		 1000 		 21.883 	 Base=4 new diag NN 
+
+30 		 2000 		 30.058 	 Base=4 new diag NN 
+
+50 		 10000 		 229.800 	 Base=4, time:exp-->lin 
+
+60 		 0 		 13.695 	 Base=8, time:exp-->lin 
+
+60 		 0 		 12.975 	 Base=8, time:exp-->lin 
+
+60 		 100 		 14.986 	 Base=8, time:exp-->lin 
+
+60 		 300 		 17.708 	 Base=8, time:exp-->lin 
+
+60 		 500 		 19.637 	 Base=8, time:exp-->lin 
+
+60 		 1000 		 27.156 	 Base=8, time:exp-->lin 
+
+60 		 2000 		 42.439 	 Base=8, time:exp-->lin 
+
+60 		 5000 		 82.183 	 Base=8, time:exp-->lin 
+
+60 		 10000 		 193.599 	 Base=8, time:exp-->lin 
+
+60 		 0 		 15.721 	 Base=8, time:exp-->lin 
+
+60 		 100 		 17.752 	 Base=8, time:exp-->lin 
+
+60 		 500 		 24.569 	 Base=8, time:exp-->lin 
+
+60 		 1000 		 32.610 	 Base=8, time:exp-->lin 
+
+60 		 2000 		 45.495 	 Base=8, time:exp-->lin 
+
+60 		 5000 		 93.695 	 Base=8, time:exp-->lin 
+
+60 		 10000 		 199.340 	 Base=8, time:exp-->lin 
+
+60 		 20000 		 520.863 	 Base=8, time:exp-->lin 
+
+60 		 0 		 13.448 	 Base=2, time:exp-->lin 
+
+60 		 100 		 15.182 	 Base=2, time:exp-->lin 
+
+60 		 500 		 21.355 	 Base=2, time:exp-->lin 
+
+60 		 1000 		 28.611 	 Base=2, time:exp-->lin 
+
+60 		 2000 		 42.450 	 Base=2, time:exp-->lin 
+
+60 		 5000 		 94.041 	 Base=2, time:exp-->lin 
+
+60 		 10000 		 189.098 	 Base=2, time:exp-->lin 
+
+60 		 20000 		 476.295 	 Base=2, time:exp-->lin 
+
+30 		 0 		 3.039 	 Base=2, time:exp-->lin 
+
+30 		 0 		 3.068 	 Base=2, time:exp-->lin 
+
+30 		 0 		 3.044 	 Base=2, time:exp-->lin 
+
+30 		 500 		 15.074 	 Base=2, time:exp-->lin 
+
+30 		 500 		 14.672 	 Base=2, time:exp-->lin 
+
+40 		 0 		 3.580 	 Base=4, time:exp-->lin 
+
+40 		 100 		 4.886 	 Base=4, time:exp-->lin 
+
+40 		 300 		 7.519 	 Base=4, time:exp-->lin 
+
+40 		 500 		 11.466 	 Base=4, time:exp-->lin 
+
+40 		 1000 		 19.918 	 Base=4, time:exp-->lin 
+
+40 		 2000 		 33.320 	 Base=4, time:exp-->lin 
+
+40 		 5000 		 69.785 	 Base=4, time:exp-->lin 
+
+40 		 10000 		 145.077 	 Base=4, time:exp-->lin 
+
+40 		 10 		 4.191 	 Base=4, time:exp-->lin 
+
+20 		 10 		 0.579 	 Base=4, time:exp-->lin 
+
+20 		 1 		 0.465 	 Base=4, time:exp-->lin 
+
+20 		 10 		 0.547 	 Base=4, time:exp-->lin 
+
+20 		 10 		 0.555 	 Base=4, time:exp-->lin 
+
+20 		 10 		 1.262 	 Base=4, time:exp-->lin 
+
+20 		 10 		 1.283 	 Base=4, time:exp-->lin 
+
+20 		 10 		 1.244 	 Base=4, time:exp-->lin 
+
+20 		 10 		 1.285 	 Base=4, time:exp-->lin 
+
+20 		 1 		 0.972 	 Base=4, time:exp-->lin 
+
+20 		 0 		 0.444 	 Base=4, time:exp-->lin 
+
+20 		 1 		 0.444 	 Base=4, time:exp-->lin 
+
+20 		 100 		 2.336 	 Base=4, time:exp-->lin 
+
+20 		 100 		 2.280 	 Base=4, time:exp-->lin 
+
+20 		 100 		 2.333 	 Base=4, time:exp-->lin 
+
+20 		 100 		 2.361 	 Base=4, time:exp-->lin 
+
+20 		 100 		 2.345 	 Base=4, time:exp-->lin 
+
+20 		 100 		 2.342 	 Base=4, time:exp-->lin 
+
+20 		 0 		 1.583 	 Base=5, time:exp-->lin 
+
+20 		 100 		 10.970 	 Base=5, time:exp-->lin 
+
+20 		 0 		 1.657 	 Base=5, time:exp-->lin 
+
+20 		 100 		 8.352 	 Base=5, time:exp-->lin 
+
+20 		 300 		 29.699 	 Base=5, time:exp-->lin 
+
+20 		 500 		 57.501 	 Base=5, time:exp-->lin 
+
+20 		 1000 		 178.145 	 Base=5, time:exp-->lin 
+
+20 		 2000 		 529.868 	 Base=5, time:exp-->lin 
+
+50 		 0 		 7.036 	 Base=5, time:exp-->lin 
+
+50 		 100 		 14.902 	 Base=5, time:exp-->lin 
+
+50 		 300 		 40.698 	 Base=5, time:exp-->lin 
+
+50 		 10 		 6.060 	 Base=5, time:exp-->lin 
+
+30 		 10 		 1.330 	 Base=5, time:exp-->lin 
+
+30 		 10 		 1.367 	 Base=5, time:exp-->lin 
+
+30 		 10 		 1.440 	 Base=5, time:exp-->lin 
+
+30 		 100 		 10.555 	 Base=5, time:exp-->lin 
+
+30 		 10 		 2.938 	 time:exp-->lin 
+
+30 		 10 		 2.868 	 time:exp-->lin 
+
+30 		 10 		 2.954 	 time:exp-->lin 
+
+30 		 5000 		 1824.108 	 Base=5, time:exp-->lin 
+
+30 		 10 		 1.548 	 time:exp-->lin 
+
+30 		 5 		 1.569 	 time:exp-->lin 
+
+30 		 5 		 1.449 	 time:exp-->lin 
+
+30 		 500 		 6.234 	 time:exp-->lin 
+
+40 		 1000 		 24.326 	 time:exp-->lin 
+
+40 		 500 		 8.445 	 time:exp-->lin 
+
+40 		 500 		 8.619 	 time:exp-->lin 
+
+40 		 500 		 8.777 	 time:exp-->lin 
+
+40 		 500 		 8.842 	 time:exp-->lin 
+
+40 		 500 		 8.788 	 time:exp-->lin 
+
+40 		 500 		 8.939 	 time:exp-->lin 
+
+40 		 500 		 8.816 	 time:exp-->lin 
+
+40 		 500 		 8.810 	 time:exp-->lin 
+
+40 		 500 		 8.787 	 time:exp-->lin 
+
+40 		 0 		 3.167 	 one loop check 
+
+50 		 0 		 6.124 	 one loop check 
+
+50 		 100 		 6.639 	 one loop check 
+
+50 		 300 		 8.458 	 one loop check 
+
+50 		 500 		 12.526 	 one loop check 
+
+50 		 1000 		 26.465 	 one loop check 
+
+50 		 2000 		 78.556 	 one loop check 
+
+50 		 5000 		 406.333 	 one loop check 
+
+50 		 10000 		 1531.338 	 one loop check 
+
+50 		 0 		 6.024 	 one loop check 
+
+50 		 100 		 6.431 	 one loop check 
+
+50 		 300 		 8.250 	 one loop check 
+
+50 		 500 		 11.174 	 one loop check 
+
+50 		 1000 		 26.863 	 one loop check 
+
+50 		 2000 		 78.253 	 one loop check 
+
+50 		 5000 		 430.948 	 one loop check 
+
+50 		 10000 		 1574.779 	 one loop check 
+
+20 		 5 		 0.539 	 one loop check 
+
+20 		 5 		 0.539 	 one loop check 
+
+20 		 5 		 0.543 	 one loop check 
+
+20 		 5 		 0.546 	 one loop check 
+
+20 		 5 		 0.543 	 one loop check 
+
+20 		 5 		 0.558 	 one loop check 
+
+20 		 5 		 0.559 	 one loop check 
+
+20 		 5 		 0.553 	 one loop check 
+
+20 		 5 		 0.582 	 one loop check 
+
+20 		 5 		 0.580 	 one loop check 
+
+20 		 5 		 0.530 	 one loop check 
+
+20 		 5 		 0.655 	 one loop check 
+
+20 		 5 		 0.663 	 one loop check 
+
+20 		 5 		 0.654 	 one loop check 
+
+20 		 5 		 0.631 	 one loop check 
+
+20 		 5 		 0.644 	 one loop check 
+
+20 		 5 		 0.647 	 one loop check 
+
+20 		 5 		 0.652 	 one loop check 
+
+20 		 5 		 0.642 	 one loop check 
+
+20 		 5 		 0.644 	 one loop check 
+
+20 		 5 		 0.641 	 one loop check 
+
+20 		 5 		 0.631 	 one loop check 
+
+20 		 5 		 0.651 	 one loop check 
+
+20 		 5 		 0.648 	 one loop check 
+
+20 		 5 		 0.675 	 one loop check 
+
+20 		 5 		 0.638 	 one loop check 
+
+40 		 1000 		 10.225 	 one loop check 
+
+40 		 1000 		 10.129 	 redefined with binding list 
+
+40 		 1000 		 10.140 	 redefined with binding list 
+
+40 		 1 		 3.208 	 redefined with binding list 
+
+40 		 100 		 4.101 	 redefined with binding list 
+
+40 		 10000 		 56.527 	 redefined with binding list 
+
+40 		 10 		 6.236 	 redefined with binding list 
+
+40 		 10000 		 59.246 	 redefined with binding list 
+
+40 		 10000 		 72.153 	 redefined with binding list 
+
+40 		 0 		 6.154 	 redefined with binding list 
+
+40 		 100 		 7.004 	 redefined with binding list 
+
+40 		 300 		 8.250 	 redefined with binding list 
+
+40 		 500 		 9.673 	 redefined with binding list 
+
+40 		 1000 		 13.001 	 redefined with binding list 
+
+40 		 2000 		 19.519 	 redefined with binding list 
+
+40 		 5000 		 39.563 	 redefined with binding list 
+
+40 		 10000 		 71.029 	 redefined with binding list 
+
+40 		 20000 		 134.197 	 redefined with binding list 
+
+40 		 50000 		 319.221 	 redefined with binding list 
+
+20 		 0 		 0 	 redefined with binding list 
+
+20 		 0 		 0 	 redefined with binding list 
+
+20 		 0 		 0 	 redefined with binding list 
+
+20 		 0 		 init: 0.596 run: 0 	 redefined with binding list 
+
+20 		 0 		 init: 0.376 run: 0 	 redefined with binding list 
+
+20 		 0 		 init: 0.369 run: 0 	 redefined with binding list 
+
+20 		 0 		 init: 0.370 run: 0 	 redefined with binding list 
+
+20 		 0 		 init: 0.381 run: 0 	 redefined with binding list 
+
+20 		 0 		 init: 0.378 run: 0 	 redefined with binding list 
+
+20 		 0 		 init: 0.456 run: 0 	 redefined with binding list 
+
+20 		 0 		 init: 0.401 run: 0 	 redefined with binding list 
+
+20 		 0 		 init: 0.402 run: 0 	 redefined with binding list 
+
+20 		 0 		 init: 0.385 run: 0 	 redefined with binding list 
+
+20 		 0 		 init: 0.391 run: 0 	 redefined with binding list 
+
+20 		 1000 		 init: 0.909 run: 0 	 redefined with binding list 
+
+40 		 1000 		 init: 3.541 run: 0 	 redefined with binding list 
+
+40 		 1000 		 init: 3.539 run: 0 	 redefined with binding list 
+
+40 		 1000 		 init: 3.507 run: 0 	 redefined with binding list 
+
+40 		 1000 		 init: 3.549 run: 0 	 redefined with binding list 
+
+40 		 1 		 init: 2.966 run: 0 	 blist and real nn 
+
+40 		 1000 		 init: 3.481 run: 0 	 blist and real nn 
+

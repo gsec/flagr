@@ -52,3 +52,8 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# ignore outputs
+output/*
+pics/*
+misc/snowflake.py

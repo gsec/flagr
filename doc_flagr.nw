@@ -1,0 +1,331 @@
+#! /usr/bin/env python
+# -*- coding: utf_8 -*-
+
+###_________________________________________________________________________###
+#####                    ::flagr::                                       ######
+#######                  a flake growth simulator                      ########
+##########                                                          ###########
+#######           Guilherme Stein (2014)                               ########
+#####             <guilherme.stein@physik.uni-wuerzburg.de>              ######
+###-------------------------------------------------------------------------###
+# python 2.7 as compatibility to ASE package
+
+from __future__ import print_function, division, generators
+import time, itertools, math, sys
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+
+class RedirectStdoutTo:
+    """
+    Class for redirecting the output to a chosen destination (e.g. a file)
+    The exit argument automatically reverts the standard output on exit, see 
+    _with_ statement.
+    """
+    def __init__(self, out_new):
+        self.out_new = out_new
+    def __enter__(self):
+        self.out_old = sys.stdout
+        sys.stdout = self.out_new
+    def __exit__(self, *args):
+        sys.stdout = self.out_old
+
+class Flake(object):
+    """
+    Creates a Flake, that will grow and be huge and beatiful if taken care 
+    of...
+    """
+    def __init__(self):
+        """
+        Initialize the class, predefines some variable from the global 
+        main-section.
+        """
+        self.atom = -1
+        self.dim = 4              # 3 for space + 1 for population status
+        self.site = (0,0,0,0)
+        self.runtime = None
+        self.a = []             # lattice array
+        self.candidates = []
+        self.energ = []
+        self.seed_idx = []
+
+        self.iteration = GROW_ITER
+        self.size = LATTICE_SIZE
+        self.twin_size = TWIN
+        self.seed_size = SEED
+        self.idx = range(LATTICE_SIZE)
+        self.seed_size = np.array(( (LATTICE_SIZE - SEED) // 2, 
+                                    (LATTICE_SIZE + SEED) // 2))
+        # offset for plane borders, WIP!
+        self.shift = self.seed_size % 2
+        self.nn = self.next_neighbour()
+
+    def next_neighbour(self, nn='diag'):
+        """
+        Creates the next-neighbours vector. First creates all combinations of 
+        (0,1,-1) and then all permutations, keeping only the unique vector. 
+        pads a zero for the fourth dimension at the end.
+        """
+        if nn == 'cross':
+            return np.array(((1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), 
+                            (-1, 0, 0, 0), (0, 0, -1, 0), (0, -1, 0, 0)))
+        else:
+            types = itertools.combinations_with_replacement([1,-1,0],3)
+            perms = []
+            for i in types:
+                t = set(itertools.permutations(i))
+                while t:
+                    perms.append(t.pop())
+            return np.pad(perms[:-1], ((0,0),(0,1)), mode='constant')
+
+    def array(self, size):
+        """ Defines the size and shape of the array. """
+        dt = np.dtype(float)
+        self.a = np.zeros(size*size*size*self.dim, 
+                dtype=dt).reshape(size,size,size,self.dim)
+
+    def vector(self, i, j, k, regular=True, shift=0):
+        """
+        Build crystal as i*a+j*b+k*c with lattice vectors:
+        a = [2, 0, 0], b = [1, sqrt(3), 0], c = [1, 1/sqrt(3), 2/sqrt(3)]
+        Regular refers to FCC-close-packing order A-B-C, where not 
+        regular refers to inverted order C-B-A, needed for twin-planes.
+        """
+        ABCABC = np.array(( 2*i + j + (k+shift)%3, 
+                            j*np.sqrt(3) + ((k+shift)%3)/np.sqrt(3),
+                             k*2./np.sqrt(3), 0))
+        CBACBA = np.array(( 2*i + j - (k+1+shift)%3, 
+                            j*np.sqrt(3) - ((k+1+shift)%3)/np.sqrt(3),
+                             k*2./np.sqrt(3), 0))
+        if regular:
+            return ABCABC
+        else:
+            return CBACBA
+
+    def lattice(self):
+        """
+        Creates a FCC-lattice based on vector() and the defined size of the 
+        twin-planes.
+        """
+        # twin planes boundaries...
+        twin_min = self.size // 2 - self.twin_size // 2
+        twin_max = self.size // 2 + self.twin_size // 2 
+        #twin_min = (self.size - self.twin_size) // 2
+        #twin_max = (self.size + self.twin_size) // 2 
+        # ... and index ranges
+        twin_l_idx = range(twin_min)
+        twin_m_idx = range(twin_min, twin_max)
+        twin_u_idx = range(twin_max, self.size)
+        # compensate for even twin plane size:
+        #mod = (self.twin_size ) % 2
+
+        for (i, j, k) in  itertools.product(self.idx, self.idx, twin_l_idx):
+            self.a[i,j,k] = self.vector(i, j, k, regular=True)
+        for (i, j, k) in  itertools.product(self.idx, self.idx, twin_m_idx):
+            self.a[i,j,k] = self.vector(i, j, k, regular=False, shift = 
+                    self.shift[0])
+        for (i, j, k) in  itertools.product(self.idx, self.idx, twin_u_idx):
+            self.a[i,j,k] = self.vector(i, j, k, regular=True, shift = 
+                    self.shift[1])
+
+    def seed(self):
+        """
+        Places a seed in the middle of the lattice.
+        """
+        seed_min = self.seed_size[0]
+        seed_max = self.seed_size[1]
+        idx = slice(seed_min, seed_max)
+        self.seed_idx = list(range(seed_min, seed_max))
+        self.a[idx, idx, idx, 3] = self.atom
+
+    def candidate_check(self, check='single'):
+        """
+        Performs an iteration over the check-object and evaluates if this site 
+        is empty and has neighbouring atoms, it adds 2 for each atom in the
+        neighbourhood. check-object can be 'single', 'seed' and 'all'.
+        """
+        def exp(x):
+            return BASE**x
+        #stime = time.time()
+        def nn_check(site):
+            nbhood = []
+
+            for step in self.nn:
+                # index tuple of nearest neighbour
+                neighbour = tuple(site + step)
+                try:
+                    # try if neighbouring site exists
+                    self.a[neighbour]
+                    if self.a[site] == self.atom                              \
+                        and self.a[neighbour] != self.atom:
+                        # if site is atom, and neighbour is empty, add 
+                        # neighbour to nbhood
+                        nbhood.append(neighbour)
+                except IndexError:
+                    print("Lattice Border reached!")
+
+            for item in nbhood:
+                # initialise item
+                self.a[item] = 0
+                for step in self.nn:
+                    # NEW neighbour (of nbhood-item)
+                    try:
+                        neighbour = tuple(item + step)
+                        if self.a[neighbour] == self.atom:
+                            # now it counts sourrounding atoms
+                            self.a[item] += 2
+                            cand = list(item)
+                            cand[3] = self.a[item]
+                            self.candidates.append(cand)
+                    except IndexError:
+                        print("Neighbour is outside lattice border!")
+
+        if check == 'single':
+            nn_check(self.site)
+            self.energy.append(exp(self.candidates[-1][3]))
+        else:
+            if check ==  'all':
+                idx = self.idx
+            elif check == 'seed':
+                idx = self.seed_idx
+            for (i, j, k) in  itertools.product(idx, idx, idx):
+                site = (i, j, k, 3)         # index tuple of site
+                if self.a[site] == self.atom:
+                    nn_check(site)
+            self.energy = map(exp, zip(*self.candidates)[3])
+        #etime = time.time()
+        #print('CHEKCTIME: ', etime-stime)
+                    
+    def grow(self):
+        try:
+            len(self.candidates) > 0
+        except Exception:
+            print("No more candidates!")
+        else:
+            #exponentiate every entry at position 3
+            #_energy = map(exp, zip(*self.candidates)[3])
+            sum_energy = sum(self.energy)
+            # normalize probabilty
+            norm_prob = tuple(item/sum_energy for item in self.energy)
+            # pick one according to relative probabilty:
+            chosen_array = np.random.multinomial(1, norm_prob)
+            chosen = np.nonzero(chosen_array)[0]
+            for lucky in chosen:
+                try:
+                    popper = self.candidates.pop(lucky)
+                    # set sites tupel to proper coordinate:
+                    popper[3] = 3
+                    self.site = tuple(popper)
+                    self.a[self.site] = self.atom
+                except: 
+                    print("chosen not there")
+
+    def plot(self, save=False):
+        # only add sites with status 1 or 2 to scatter plot:
+        x, _x = [], self.a[:,...,0].flatten()
+        y, _y = [], self.a[:,...,1].flatten()
+        z, _z = [], self.a[:,...,2].flatten()
+        t, _t = [], self.a[:,...,3].flatten()
+
+        for i, elem in enumerate(_t):
+            if elem:
+                x.append(_x[i])
+                y.append(_y[i])
+                z.append(_z[i])
+                t.append(_t[i])
+
+        # options:
+        font = {'family' : 'serif', 'color' : 'darkred', 
+                'weight' : 'normal', 'size'   : 18}
+        plt.xlabel('x', fontdict=font)
+        plt.ylabel('y', fontdict=font)
+        crange = (self.atom, len(self.nn))
+        spectrum = 'spectral'   # 'gist_stern'
+        cbar = plt.cm.ScalarMappable(cmap=spectrum, 
+                norm=plt.normalize(vmin=crange[0], 
+            vmax=crange[1]))
+        cbar._A = []
+
+        # plotting:
+        plt.clf()
+        fig = plt.figure(1)
+        ax = fig.add_subplot(111, projection='3d')
+        ax.scatter(x, y, z, c=t, cmap=spectrum, vmin=crange[0], 
+                vmax=crange[1], s=BALL_SIZE) 
+        plt.colorbar(cbar)
+
+        # output
+        if save:
+            #if RSEED:
+                #pass
+            #else:
+                #RSEED = np.randint(999)
+            plt.savefig('goldflake_{}_{}_{}'.format(RSEED, counter ,thing)    \
+                    + '.png')
+        else:
+            plt.show()
+        
+    def info(self, file_out=False, grid_info=False):
+        """ Print out status information about the Flake. """
+        if file_out:
+            print(self.size, '\t\t', self.iteration,  '\t\t', self.runtime,   \
+                    '\t', COMMENT, '\n')
+        elif not file_out:
+            print("-------------------------------")
+            #print("Packing Structure: ",self.packing)
+            print("Nearest neighbours:\n", self.nn)
+            print()
+            print("Lattice Dimensions:", self.size, "x", self.size, "x", 
+                    self.size, "with", self.iteration, "iterations")        
+            print("Ran in", self.runtime, "seconds")
+        if grid_info:
+            print("4th grid entry defines the status of site: \n",
+                    "0:\t empty site\n",
+                    "1:\t gold atom\n",
+                    "2:\t empty site next to atom => possible attachement\n")
+
+    def main(self):
+        """ main logic loop """
+        starttime = time.time()
+        self.array(self.size)
+        self.lattice()
+        self.seed()
+        self.candidate_check(check='seed')
+        for i in range(self.iteration):
+            self.grow()
+            self.candidate_check()
+        endtime = time.time()
+        self.runtime  = "%.3f" % (endtime - starttime)
+        self.info()
+        with open('timing.txt', mode='a') as logfile,                         \
+                    RedirectStdoutTo(logfile):
+            self.info(file_out=True)
+
+# ::::: : :::::
+
+RSEED = np.random.randint(99999)
+np.random.seed(RSEED)           
+
+if __name__ == "__main__":
+    GROW_ITER = 500
+    BALL_SIZE = 100
+    LATTICE_SIZE = 30
+    SEED = 7
+    TWIN = 3
+    BASE = 2
+    COMMENT = 'Base=2, time:exp-->lin'
+
+it = False
+if it:
+    counter = 0
+    for thing in [0, 100, 500, 1000, 2000, 5000, 10000, 20000]:
+        GROW_ITER = thing
+        gold = Flake()
+        gold.main()
+        gold.plot(save=True)
+        counter += 1
+else:
+        gold = Flake()
+        gold.main()
+        gold.plot()
