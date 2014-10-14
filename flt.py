@@ -6,16 +6,16 @@ import numpy as np
 
 def next_neighbour(nn='diag'):
     """
-    Creates the next-neighbours vector. First creates all combinations of 
-    (0,1,-1) and then all permutations, keeping only the unique vector. 
+    Creates the next-neighbours vector. First creates all combinations of
+    (0,1,-1) and then all permutations, keeping only the unique vector.
     pads a zero for the fourth dimension at the end.
     Returns index-type
     """
     if nn == 'cross':
-        return np.array(((1, 0, 0), (0, 1, 0), (0, 0, 1),                   \
+        return np.array(((1, 0, 0), (0, 1, 0), (0, 0, 1),
                         (-1, 0, 0), (0, 0, -1), (0, -1, 0)))
     elif nn == 'real':
-        return np.array(((0,0,-1),(1,0,-1),(0,1,-1),                        \
+        return np.array(((0,0,-1),(1,0,-1),(0,1,-1),
         (1,0,0),(1,-1,0),(0,-1,0),(-1,0,0),(-1,1,0),(0,1,0),
         (0,0,1),(-1,0,1),(0,-1,1)))
     else:
@@ -32,14 +32,14 @@ def vector(i, j, k, regular=True, shift=0):
     """
     Build crystal as i*a+j*b+k*c with lattice vectors:
     a = [2, 0, 0], b = [1, sqrt(3), 0], c = [1, 1/sqrt(3), 2/sqrt(3)]
-    Regular refers to FCC-close-packing order A-B-C, where not 
+    Regular refers to FCC-close-packing order A-B-C, where not
     regular refers to inverted order C-B-A, needed for twin-planes.
     returns coordinate-type
     """
-    ABCABC = np.array(( 2*i + j + (k+shift)%3, 
+    ABCABC = np.array(( 2*i + j + (k+shift)%3,
                         j*np.sqrt(3) + ((k+shift)%3)/np.sqrt(3),
                          k*2./np.sqrt(3), 0))
-    CBACBA = np.array(( 2*i + j - (k+1+shift)%3, 
+    CBACBA = np.array(( 2*i + j - (k+1+shift)%3,
                         j*np.sqrt(3) - ((k+1+shift)%3)/np.sqrt(3),
                          k*2./np.sqrt(3), 0))
     if regular:
@@ -50,7 +50,7 @@ def vector(i, j, k, regular=True, shift=0):
 class RedirectStdoutTo:
     """
     Class for redirecting the output to a chosen destination (e.g. a file)
-    The exit argument automatically reverts the standard output on exit, see 
+    The exit argument automatically reverts the standard output on exit, see
     _with_ statement.
     """
     def __init__(self, out_new):
