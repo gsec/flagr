@@ -50,53 +50,40 @@ class FlakeBase(object):
 
 
 class Flake(FlakeBase):
-
-  """
-  @ todo
-  GROW_ITER = 100       # number of atoms initally deposited
-  BALL_SIZE = 50        # size of spheres in plot
-  LATTICE_SIZE = 20     # edge length of lattice cube
-  SEED = 5          # edge length of seed
-  TWIN = 2          # height of twin planes
-  BASE = 10          # base for binding energy =: BASE**BINDINGS
-  DISTANCE = 2        # radius including atoms as next neighbours
-  AX_FIX = False
-  COMMENT = 'nothing'
-  """
-
   def __init__(self, **kwargs):
     """
-    Initialize the class, predefines variables from the global class
-    section.
-    # lattice constants:
-    self.iteration    = Flake.GROW_ITER
-    self.size         = Flake.LATTICE_SIZE
-    self.twin_size    = Flake.TWIN
-    self.seed         = Flake.SEED
-    self.e_base       = Flake.BASE
-    self.nn_distance  = Flake.DISTANCE
+    The "Flake" creates a lattice, more precise a mapping of a cubic- to a
+    fcc-lattice. The lattice is then populated with a seed flake, containing a
+    twin plane. As arguments a dictionary is expected, with following entries:
+
+      --key--      --type--          --description--
+    iteration    : int      | number of atoms initally deposited
+    size         : int      | edge length of lattice cube
+    twin_size    : int      | edge length of seed
+    seed         : int      | height of twin planes
+    e_base       : int      | base for binding energy =: BASE**BINDINGS
+    nn_distance  : int      | radius including atoms as next neighbours
     """
     self.attribute_setter(**kwargs)
 
     # lattice specifications:
-    self.a = np.zeros(4 * self.size**3).reshape(self.size,
-                                                self.size,
-                                                self.size,
-                                                4)  # (x,y,z,t)
+    self.a = np.zeros(4 * self.size**3).reshape(self.size,  # x'
+                                                self.size,  # y'
+                                                self.size,  # z'
+                                                4)          # (x,y,z,t)
     self.seed_size = np.array(((self.size - self.seed) // 2,
                                (self.size + self.seed) // 2))
-    self.nn_type = 'all'
-    self.nn = flt.next_neighbour(self.nn_type)
+    self.nn = flt.next_neighbour('all')
 
     # attribute initialization:
-    self.atom = -1
-    self.site = (0, 0, 0)
-    self.runtime = 0
-    self.inittime = 0
-    self.idx = range(self.size)
-    self.prob_sum = 0
-    self.prob_list = []
-    self.bindings = []
+    self.atom       = -1
+    self.site       = (0, 0, 0)
+    self.runtime    = 0
+    self.inittime   = 0
+    self.idx        = range(self.size)
+    self.prob_sum   = 0
+    self.prob_list  = []
+    self.bindings   = []
     self.candidates = []
 
     # ok, what is this exactly ???
@@ -366,16 +353,19 @@ class Flake(FlakeBase):
 
 # ::::: : :::::
 
-lattice_params = {
-    'iteration': 100,    # number of atoms initally deposited
-    'size': 20,     # edge length of lattice cube
-    'twin_size': 2,      # height of twin planes
-    'seed': 5,      # edge length of seed-crystal
-    'e_base': 10,     # binding energy =: BASE**BINDINGS
-    'nn_distance': 2,      # radius considering atoms as NN
-    }
-
-plot_params = {'sphere_size': 50, 'fixed_axes': False, 'comment': ''}
+flake_params  = {
+              # lattice parameters
+                'iteration': 100,
+                'size': 20,
+                'twin_size': 2,
+                'seed': 5,
+                'e_base': 10,
+                'nn_distance': 2,
+              # output parameters
+                'sphere_size': 50,
+                'fixed_axes': False,
+                'comment': ''
+                }
 
 RSEED = np.random.randint(99999)
 np.random.seed(RSEED)
@@ -399,3 +389,5 @@ else:
     gold = Flake()
     gold.main()
     gold.plot()
+  else:
+    go = Flake(**flake_params)

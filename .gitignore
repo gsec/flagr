@@ -53,6 +53,9 @@ docs/_build/
 # PyBuilder
 target/
 
+# Rope
+.ropeproject
+
 # ignore outputs
 output/*
 pics/*
