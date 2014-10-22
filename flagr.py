@@ -45,6 +45,21 @@ class FlakeBase(object):
     return {k: v for k, v in self.__dict__.iteritems() if k in return_list}
 
 #==============================================================================#
+#                                  class Grid                                  #
+#==============================================================================#
+class Grid(FlakeBase):
+
+  """Here I write my docstring"""
+
+  def __init__(self, **kwargs):
+    """TODO: to be defined1.
+
+    :**kwargs: TODO
+
+    """
+    attribute_setter(**kwargs)
+
+#==============================================================================#
 #                                 class Flake                                  #
 #==============================================================================#
 
@@ -70,7 +85,7 @@ class Flake(FlakeBase):
     self.a = np.zeros(4 * self.size**3).reshape(self.size,  # x'
                                                 self.size,  # y'
                                                 self.size,  # z'
-                                                4)          # (x,y,z,t)
+                                                5)          # (x,y,z,t,u)
     self.seed_size = np.array(((self.size - self.seed) // 2,
                                (self.size + self.seed) // 2))
     self.nn = flt.next_neighbour('all')
@@ -145,50 +160,90 @@ class Flake(FlakeBase):
         if self.a[site][3] == self.atom:
           self.nn_check(site)
 
-  def nn_check(self, site_idx, checkonly=False):
-    """
-    First loop iterates over next neighbours and collects them in nbhood if
-    they are empty. Second loop iterates over nbhood and adds a binding for
-    each of THOSE neighbours that are atoms.
-    """
-    nbhood = []        # neighbourhood
-    indices = []        # nb vectors with binding numbers
-    for step in self.nn:
-      neighbour_idx = tuple(np.array(site_idx) + np.array(step))
-      try:
-        neighbour = self.a[neighbour_idx][3]   # does it even exist?
-        dist = self.distance(site_idx, neighbour_idx)
-        if neighbour != self.atom and dist < self.nn_distance:
-          nbhood.append(neighbour_idx)
-      except Exception:
-        print("Lattice Border reached!")
+  def neighbour(self, site):
+    # zip together coordinate and next neighbour tuples
+    pairs = [zip(site, nn) for nn in self.nn]
+    # return list of tuples, containing added coordinates
+    return [tuple(sum(y) for y in x) for x in pairs]
 
-    for nb in nbhood:
-      # increase bindings counter, each entry counts the actual number of
-      # bindings represented by the list index
-      bind_idx = 0
-      for step in self.nn:
-        # NEW neighbour (of nbhood-item)
-        n_neighbour_idx = tuple(np.array(nb) + np.array(step))
-        # n_neighbour_idx = tuple(nb + step)    #neighbour's neighbour
-        try:
-          n_neighbour = self.a[n_neighbour_idx][3]
-          if n_neighbour == self.atom:
-            # now it counts sourrounding atoms
-            bind_idx += 1
-        except IndexError:
-          print("Neighbour is outside lattice border!")
-      # append lattice object to candidates list, according to binding number
-      # nb should always be free space here! index type
-      if checkonly:
-        indices.append((nb, bind_idx))
-        print("checkonly")
-      else:
-        indices.append((nb, bind_idx))
-        self.candidates[bind_idx].append(nb)   # was list(nb)
-        self.bindings[bind_idx] += 1
-        self.a[nb][3] = bind_idx
+  def site_status(self, site_list=None, idx=3):
+    if site_list == None:
+      site_list = self.site
+    return [self.a[site][idx] for site in site_list]
+
+
+##  make get, set status, make class,  for lattice
+  def nn_check(self, site=None):
+    if site == None:
+      site = self.site
+    bind_idx = 0
+    indices = []
+    try:
+      nb = self.neighbour(site)
+    except IndexError:
+      print("Lattice border reached")
+    for space in nb:
+      if self.site_status(space) == self.atom:
+        bind_idx += 1
+      #else: and self.site_status(4) == 1
+        #self.candidates[bind_idx].append(space)
+        #self.a[space][3] = bind_idx
+    self.bindings[bind_idx] += 1
+    if site_status(site) is not self.atom:
+      site_status(site) = bind_idx
+    indices.append((site, bind_idx))
     return indices
+
+#         indices.append((nb, bind_idx))
+#         self.candidates[bind_idx].append(nb)   # was list(nb)
+#         self.bindings[bind_idx] += 1
+#         self.a[nb][3] = bind_idx
+
+
+#   def nn_check(self, site_idx, checkonly=False):
+#     """
+#     First loop iterates over next neighbours and collects them in nbhood if
+#     they are empty. Second loop iterates over nbhood and adds a binding for
+#     each of THOSE neighbours that are atoms.
+#     """
+#     nbhood = []        # neighbourhood
+#     indices = []        # nb vectors with binding numbers
+#     for step in self.nn:
+#       neighbour_idx = tuple(np.array(site_idx) + np.array(step))
+#       try:
+#         neighbour = self.a[neighbour_idx][3]   # does it even exist?
+#         dist = self.distance(site_idx, neighbour_idx)
+#         if neighbour != self.atom and dist < self.nn_distance:
+#           nbhood.append(neighbour_idx)
+#       except Exception:
+#         print("Lattice Border reached!")
+#
+#     for nb in nbhood:
+#       # increase bindings counter, each entry counts the actual number of
+#       # bindings represented by the list index
+#       bind_idx = 0
+#       for step in self.nn:
+#         # NEW neighbour (of nbhood-item)
+#         n_neighbour_idx = tuple(np.array(nb) + np.array(step))
+#         # n_neighbour_idx = tuple(nb + step)    #neighbour's neighbour
+#         try:
+#           n_neighbour = self.a[n_neighbour_idx][3]
+#           if n_neighbour == self.atom:
+#             # now it counts sourrounding atoms
+#             bind_idx += 1
+#         except IndexError:
+#           print("Neighbour is outside lattice border!")
+#       # append lattice object to candidates list, according to binding number
+#       # nb should always be free space here! index type
+#       if checkonly:
+#         indices.append((nb, bind_idx))
+#         print("checkonly")
+#       else:
+#         indices.append((nb, bind_idx))
+#         self.candidates[bind_idx].append(nb)   # was list(nb)
+#         self.bindings[bind_idx] += 1
+#         self.a[nb][3] = bind_idx
+#     return indices
 
   def distance(self, atom1, atom2):
     """
@@ -386,8 +441,8 @@ if False:
     counter += 1
 else:
   if __name__ == "__main__":
-    gold = Flake()
+    gold = Flake(**flake_params)
     gold.main()
-    gold.plot()
-  else:
-    go = Flake(**flake_params)
+    #gold.plot()
+
+go = Flake(**flake_params)
