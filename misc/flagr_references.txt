@@ -1,0 +1,20 @@
+http://www.ctcms.nist.gov/fipy/
+http://networkx.github.com/ 
+http://pycx.sourceforge.net/
+http://code.activestate.com/recipes/578533-gravner-griffeath-snowflake-simulation/
+http://www.ewanhemingway.co.uk/blog/growing-crystals-python/
+
+
+Lattice vectors and nearest neighbours:
+======================================
+Lattice Volume Rendering
+ By Feng Qiu
+http://books.google.de/books?id=pPHnPPy-cjcC&pg=PA90&lpg=PA90&dq=fcc+lattice+vector+mod&source=bl&ots=4bFLxrJAiE&sig=1FX5h-w3GUNM0H4oOLUJukIfIps&hl=en&sa=X&ei=TS_ZUuScEqbFyQOL2ICQDQ&redir_esc=y#v=onepage&q=hcp&f=false
+
+search query:
+=============
+https://www.google.com/search?output=search&sclient=psy-ab&q=lattice%20volume%20rendering&oq=&gs_l=&pbx=1#q=lattice+volume+rendering+face+cubic+centered+filetype:pdf
+
+
+
+
