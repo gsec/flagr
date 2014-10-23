@@ -51,13 +51,84 @@ class Grid(FlakeBase):
 
   """Here I write my docstring"""
 
-  def __init__(self, **kwargs):
+  def __init__(self, params=None):
     """TODO: to be defined1.
 
     :**kwargs: TODO
 
     """
-    attribute_setter(**kwargs)
+    # attribute initialization:
+    if params is None:
+      params = {# lattice parameters
+                'iteration': 100,
+                'size': 20,
+                'twin_size': 2,
+                'seed': 5,
+                'e_base': 10,
+                'nn_distance': 2,
+              # output parameters
+                'sphere_size': 50,
+                'fixed_axes': False,
+                'comment': ''
+                }
+    self.attribute_setter(**params)
+    self.atom       = -1
+    self.site       = (0, 0, 0)
+
+    # lattice specifications:
+    self.lattice = np.zeros(5 * self.size**3).reshape(
+        self.size,      # x'
+        self.size,      # y'
+        self.size,      # z'
+        5)              # ((x,y,z), t, u)
+
+  def set_update(self, coord, update=True):
+    """
+    Set the probabilty (pos. integer) or define atom(t=-1) at the point `coord`
+    of the lattice
+
+    :param  coord: coordinates of base lattice
+    :type   coord: 3 dim. tuple
+
+    :param  update: energy of the lattice point
+    :type   update: integer
+    """
+    x, y, z = *coord
+    u = 4
+    self.lattice[x,y,z,u] = up
+
+  def set_point(self, coord, energy=None, update=None):
+    """
+    Set the probabilty (pos. integer) or define atom(t=-1) at the point `coord`
+    of the lattice
+
+    :param  coord: coordinates of base lattice
+    :type   coord: 3 dim. tuple
+
+    :param  energy: energy of the lattice point
+    :type   energy: integer
+
+    :param  update: indicates the update status of lattice point
+    :type   update: bool
+    """
+    x, y, z = *coord
+    if energy:
+      self.lattice[x,y,z,3] = energy
+    elif update is not None:
+      self.lattice[x,y,z,4] = update
+    else:
+      return self.lattice[x, y, z]
+
+  def populate(self):
+    """Populate basic cubic grid with proper lattice coordinates
+    :returns: TODO
+
+    """
+    pass
+
+    #self.seed_size = np.array(((self.size - self.seed) // 2,
+                               #(self.size + self.seed) // 2))
+    #self.nn = flt.next_neighbour('all')
 
 #==============================================================================#
 #                                 class Flake                                  #
@@ -81,18 +152,8 @@ class Flake(FlakeBase):
     """
     self.attribute_setter(**kwargs)
 
-    # lattice specifications:
-    self.a = np.zeros(4 * self.size**3).reshape(self.size,  # x'
-                                                self.size,  # y'
-                                                self.size,  # z'
-                                                5)          # (x,y,z,t,u)
-    self.seed_size = np.array(((self.size - self.seed) // 2,
-                               (self.size + self.seed) // 2))
-    self.nn = flt.next_neighbour('all')
 
     # attribute initialization:
-    self.atom       = -1
-    self.site       = (0, 0, 0)
     self.runtime    = 0
     self.inittime   = 0
     self.idx        = range(self.size)
@@ -190,7 +251,8 @@ class Flake(FlakeBase):
         #self.a[space][3] = bind_idx
     self.bindings[bind_idx] += 1
     if site_status(site) is not self.atom:
-      site_status(site) = bind_idx
+      #site_status(site) = bind_idx
+      pass
     indices.append((site, bind_idx))
     return indices
 
@@ -445,4 +507,4 @@ else:
     gold.main()
     #gold.plot()
 
-go = Flake(**flake_params)
+#go = Flake(**flake_params)
