@@ -28,6 +28,28 @@ def next_neighbour(nn='diag'):
         return perms[:-1]
         #return np.pad(perms[:-1], ((0,0),(0,1)), mode='constant')
 
+def vector2(i, j, k, twinned=False, shift=0):
+  """TODO: Docstring for function.
+
+  :i: TODO
+  :j: TODO
+  :k: TODO
+  :twinned: TODO
+  :shift: TODO
+  :returns: TODO
+
+  """
+  a = np.array([2,0,0])
+  b = np.array([1, np.sqrt(3), 0])
+  c = np.array([1, 1/np.sqrt(3), 2/np.sqrt(3)])
+  z = np.array([i,j,k])
+  ABC = (a + b + c) * z
+  BCA = (b + c + a) * z
+  if twinned:
+    return BCA
+  else:
+    return ABC
+
 def vector(i, j, k, regular=True, shift=0):
     """
     Build crystal as i*a+j*b+k*c with lattice vectors:
