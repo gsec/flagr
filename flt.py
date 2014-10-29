@@ -28,7 +28,7 @@ def next_neighbour(nn='diag'):
         return perms[:-1]
         #return np.pad(perms[:-1], ((0,0),(0,1)), mode='constant')
 
-def vector2(i, j, k, twinned=False, shift=0):
+def vector2(indices, twinned=False, shift=0):
   """TODO: Docstring for function.
 
   :i: TODO
@@ -39,31 +39,31 @@ def vector2(i, j, k, twinned=False, shift=0):
   :returns: TODO
 
   """
+  i, j, k = indices
   a = np.array([2,0,0])
   b = np.array([1, np.sqrt(3), 0])
   c = np.array([1, 1/np.sqrt(3), 2/np.sqrt(3)])
   z = np.array([i,j,k])
   ABC = (a + b + c) * z
-  BCA = (b + c + a) * z
+  BCA = (a + b - c) * z
   if twinned:
     return BCA
   else:
     return ABC
 
-def vector(i, j, k, regular=True, shift=0):
+def vector(indices, regular=True, shift=0):
     """
     Build crystal as i*a+j*b+k*c with lattice vectors:
-    a = [2, 0, 0], b = [1, sqrt(3), 0], c = [1, 1/sqrt(3), 2/sqrt(3)]
-    Regular refers to FCC-close-packing order A-B-C, where not
     regular refers to inverted order C-B-A, needed for twin-planes.
     returns coordinate-type
     """
+    i, j, k = indices
     ABCABC = np.array(( 2*i + j + (k+shift)%3,
                         j*np.sqrt(3) + ((k+shift)%3)/np.sqrt(3),
-                         k*2./np.sqrt(3), 0))
+                         k*2./np.sqrt(3)))
     CBACBA = np.array(( 2*i + j - (k+1+shift)%3,
                         j*np.sqrt(3) - ((k+1+shift)%3)/np.sqrt(3),
-                         k*2./np.sqrt(3), 0))
+                         k*2./np.sqrt(3)))
     if regular:
         return ABCABC
     else:

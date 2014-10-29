@@ -35,21 +35,24 @@ class FlakeBase(object):
     """
     Sets kwargs as instance attributes.
     """
-    for key, value in kwargs.iteritems():
+    for key, value in kwargs.items():
       setattr(self, key, value)
 
   def return_dict(self, return_list):
     """
     Extracts instance attributes into dictionary from return_list.
     """
-    return {k: v for k, v in self.__dict__.iteritems() if k in return_list}
+    return {k: v for k, v in self.__dict__.items() if k in return_list}
 
 #==============================================================================#
 #                                  class Grid                                  #
 #==============================================================================#
 class Grid(FlakeBase):
 
-  """Here I write my docstring"""
+  """
+  Grid Object containg the lattice points with x,y,z coordinates, the
+  probability for the adsorption of an atom and the update flag.
+  """
 
   def __init__(self, params=None):
     """TODO: to be defined1.
@@ -57,7 +60,7 @@ class Grid(FlakeBase):
     :**kwargs: TODO
 
     """
-    # attribute initialization:
+    # attribute initialization
     if params is None:
       params = {# lattice parameters
                 'iteration': 100,
@@ -66,36 +69,24 @@ class Grid(FlakeBase):
                 'seed': 5,
                 'e_base': 10,
                 'nn_distance': 2,
-              # output parameters
+                # output parameters
                 'sphere_size': 50,
                 'fixed_axes': False,
                 'comment': ''
                 }
     self.attribute_setter(**params)
-    self.atom       = -1
-    self.site       = (0, 0, 0)
+    self.atom     = -1
+    self.site     = (0, 0, 0)
+
+    self.nn = flt.next_neighbour('all')
+
 
     # lattice specifications:
-    self.lattice = np.zeros(5 * self.size**3).reshape(
+    self.lattice  = np.zeros(5 * self.size**3).reshape(
         self.size,      # x'
         self.size,      # y'
         self.size,      # z'
         5)              # ((x,y,z), t, u)
-
-  def set_update(self, coord, update=True):
-    """
-    Set the probabilty (pos. integer) or define atom(t=-1) at the point `coord`
-    of the lattice
-
-    :param  coord: coordinates of base lattice
-    :type   coord: 3 dim. tuple
-
-    :param  update: energy of the lattice point
-    :type   update: integer
-    """
-    x, y, z = *coord
-    u = 4
-    self.lattice[x,y,z,u] = up
 
   def set_point(self, coord, energy=None, update=None):
     """
@@ -111,7 +102,7 @@ class Grid(FlakeBase):
     :param  update: indicates the update status of lattice point
     :type   update: bool
     """
-    x, y, z = *coord
+    x, y, z = coord
     if energy:
       self.lattice[x,y,z,3] = energy
     elif update is not None:
@@ -124,11 +115,61 @@ class Grid(FlakeBase):
     :returns: TODO
 
     """
-    pass
+    idx = range(self.size)
+    for (i, j, k) in it.product(idx, idx, idx):
+      self.lattice[i, j, k][:3] = flt.vector2((i, j, k))
 
-    #self.seed_size = np.array(((self.size - self.seed) // 2,
-                               #(self.size + self.seed) // 2))
-    #self.nn = flt.next_neighbour('all')
+  def make_seed(self):
+    """
+    Places a seed in the middle of the lattice.
+    """
+    self.seed_size = np.array(((self.size - self.seed) // 2,
+                               (self.size + self.seed) // 2))
+    seed_min = self.seed_size[0]
+    seed_max = self.seed_size[1]
+    idx = slice(seed_min, seed_max)
+    self.seed_idx = list(range(seed_min, seed_max))
+    self.lattice[idx, idx, idx, 3] = self.atom
+
+  def collector(self):
+    # only add sites with status 1 or 2 to scatter plot:
+    x, _x = [], self.lattice[:, ..., 0].flatten()
+    y, _y = [], self.lattice[:, ..., 1].flatten()
+    z, _z = [], self.lattice[:, ..., 2].flatten()
+    t, _t = [], self.lattice[:, ..., 3].flatten()
+
+    for i, elem in enumerate(_t):
+      if elem:
+        x.append(_x[i])
+        y.append(_y[i])
+        z.append(_z[i])
+        t.append(_t[i])
+
+    return x, y, z, t
+
+  #def main(self):
+    #self.populate()
+    #self.make_seed()
+
+  #def lattice(self):
+    #"""
+    #Creates a FCC-lattice based on flt.vector() and the size of the
+    #twin-planes.
+    #"""
+     #twin planes boundaries...
+    #twin_min = (self.size - self.twin_size) // 2
+    #twin_max = (self.size + self.twin_size) // 2
+     #... and index ranges
+    #twin_l_idx = range(twin_min)
+    #twin_m_idx = range(twin_min, twin_max)
+    #twin_u_idx = range(twin_max, self.size)
+
+    #for (i, j, k) in it.product(self.idx, self.idx, twin_l_idx):
+      #self.a[i, j, k] = flt.vector(i, j, k, regular=True)
+    #for (i, j, k) in it.product(self.idx, self.idx, twin_m_idx):
+      #self.a[i, j, k] = flt.vector(i, j, k, regular=False, shift=self.shift[0])
+    #for (i, j, k) in it.product(self.idx, self.idx, twin_u_idx):
+      #self.a[i, j, k] = flt.vector(i, j, k, regular=True, shift=self.shift[1])
 
 #==============================================================================#
 #                                 class Flake                                  #
@@ -151,55 +192,27 @@ class Flake(FlakeBase):
     nn_distance  : int      | radius including atoms as next neighbours
     """
     self.attribute_setter(**kwargs)
-
-
-    # attribute initialization:
+    # grid initialization
+    self.grid = Grid()
+    self.grid.populate()
+    self.lattice = self.grid.lattice
+    # attribute initialization
     self.runtime    = 0
     self.inittime   = 0
-    self.idx        = range(self.size)
+    #self.idx        = range(self.size)
     self.prob_sum   = 0
     self.prob_list  = []
     self.bindings   = []
     self.candidates = []
 
-    # ok, what is this exactly ???
-    for nn in range(len(self.nn)+1):
-      self.candidates.append([])
-      self.bindings.append(0)
-      self.prob_list.append(0)
+    # TODO: heck out whether this is really needed
+    #for nn in range(len(self.nn)+1):
+      #self.candidates.append([])
+      #self.bindings.append(0)
+      #self.prob_list.append(0)
 
     # offset for plane borders, WIP!
-    self.shift = self.seed_size % 2
-
-  def lattice(self):
-    """
-    Creates a FCC-lattice based on flt.vector() and the size of the
-    twin-planes.
-    """
-    # twin planes boundaries...
-    twin_min = (self.size - self.twin_size) // 2
-    twin_max = (self.size + self.twin_size) // 2
-    # ... and index ranges
-    twin_l_idx = range(twin_min)
-    twin_m_idx = range(twin_min, twin_max)
-    twin_u_idx = range(twin_max, self.size)
-
-    for (i, j, k) in it.product(self.idx, self.idx, twin_l_idx):
-      self.a[i, j, k] = flt.vector(i, j, k, regular=True)
-    for (i, j, k) in it.product(self.idx, self.idx, twin_m_idx):
-      self.a[i, j, k] = flt.vector(i, j, k, regular=False, shift=self.shift[0])
-    for (i, j, k) in it.product(self.idx, self.idx, twin_u_idx):
-      self.a[i, j, k] = flt.vector(i, j, k, regular=True, shift=self.shift[1])
-
-  def make_seed(self):
-    """
-    Places a seed in the middle of the lattice.
-    """
-    seed_min = self.seed_size[0]
-    seed_max = self.seed_size[1]
-    idx = slice(seed_min, seed_max)
-    self.seed_idx = list(range(seed_min, seed_max))
-    self.a[idx, idx, idx, 3] = self.atom
+    #self.shift = self.seed_size % 2
 
   def candidate_check(self, site=None, check='single'):
     """
@@ -221,16 +234,16 @@ class Flake(FlakeBase):
         if self.a[site][3] == self.atom:
           self.nn_check(site)
 
-  def neighbour(self, site):
-    # zip together coordinate and next neighbour tuples
-    pairs = [zip(site, nn) for nn in self.nn]
-    # return list of tuples, containing added coordinates
-    return [tuple(sum(y) for y in x) for x in pairs]
+#  def neighbour(self, site):
+#    # zip together coordinate and next neighbour tuples
+#    pairs = [zip(site, nn) for nn in self.nn]
+#    # return list of tuples, containing added coordinates
+#    return [tuple(sum(y) for y in x) for x in pairs]
 
-  def site_status(self, site_list=None, idx=3):
-    if site_list == None:
-      site_list = self.site
-    return [self.a[site][idx] for site in site_list]
+  #def site_status(self, site_list=None, idx=3):
+    #if site_list == None:
+      #site_list = self.site
+    #return [self.a[site][idx] for site in site_list]
 
 
 ##  make get, set status, make class,  for lattice
@@ -370,46 +383,61 @@ class Flake(FlakeBase):
     print("-------------------------------")
 
   def plot(self, save=False):
-    # only add sites with status 1 or 2 to scatter plot:
-    x, _x = [], self.a[:, ..., 0].flatten()
-    y, _y = [], self.a[:, ..., 1].flatten()
-    z, _z = [], self.a[:, ..., 2].flatten()
-    t, _t = [], self.a[:, ..., 3].flatten()
-
-    for i, elem in enumerate(_t):
-      if elem:
-        x.append(_x[i])
-        y.append(_y[i])
-        z.append(_z[i])
-        t.append(_t[i])
+    """
+    Plot method of the Flake object. Requires (x,y,z) as coordinates and `t` for
+    the color scale.
+    """
+    x, y, z, t = self.grid.collector()
 
     # options:
-    font = {
-        'family': 'serif',
-        'color': 'darkred',
-        'weight': 'normal',
-        'size': 18}
+    font =  {
+            'family': 'serif',
+            'color': 'darkred',
+            'weight': 'normal',
+            'size': 18
+            }
+    params =  {
+        #'atom': self.grid.atom,
+        #'nn_length': len(self.grid.nn),
+        's':    self.grid.sphere_size,
+        'size': self.grid.size,
+        'cmap': 'spectral',
+        'vmin':self.grid.atom,
+        'vmax':len(self.grid.nn) // 2,
+        'z_lower': - self.grid.size / 2  + 2* self.grid.seed_size,
+        'z_upper':    self.grid.size / 2  + 2* self.grid.seed_size
+        }
+
     plt.xlabel('x', fontdict=font)
     plt.ylabel('y', fontdict=font)
-    crange = (self.atom, len(self.nn) // 2)
-    spectrum = 'spectral'                       # 'gist_stern'
+    #crange = (self.grid.atom, len(self.grid.nn) // 2)
+
     cbar = plt.cm.ScalarMappable(
-        cmap=spectrum,
-        norm=plt.normalize(
-            vmin=crange[0],
-            vmax=crange[1]))
+        cmap=params['cmap'],
+        norm=plt.normalize( **{k: params[k] for k in ('vmin','vmax')} )
+        )
+    # set empty array, matplotlib needs this
     cbar._A = []
+    #spectrum = params['spectrum']
+    #cbar = plt.cm.ScalarMappable(
+        #cmap=params['spectrum'],
+        #norm=plt.normalize(
+            #vmin=params['vmin'],
+            #vmax=params['vmax']))
 
     # plotting:
     plt.clf()
     fig = plt.figure(1)
     ax = fig.add_subplot(111, projection='3d')
-    ax.scatter(x, y, z, c=t, cmap=spectrum, vmin=crange[0], vmax=crange[1],
-               s=self.sphere_size)
-    if self.fixed_axes:
-      ax.set_xlim(0, 2 * self.size)
-      ax.set_ylim(0, 2 * self.size)
-      ax.set_zlim(-self.size / 2 + 2 * self.seed, self.size / 2 + 2 * self.seed)
+    ax.scatter(x, y, z, c=t, **{k: params[k] for k in ('vmin','vmax','s','cmap')})
+        #(k:params[k] if k in ['vmin','vmax','cmap','s']))
+              #cmap=spectrum, vmin=crange[0], vmax=crange[1],
+               #s=self.grid.sphere_size)
+    if self.grid.fixed_axes:
+      ax.set_xlim(0, 2 * params['size'])
+      ax.set_ylim(0, 2 * params['size'])
+      #ax.set_zlim(-self.size / 2 + 2 * self.seed, self.size / 2 + 2 * self.seed)
+      ax.set_zlim(params['z_lower'], params['z_upper'])
     plt.colorbar(cbar)
 
     # output
@@ -447,7 +475,7 @@ class Flake(FlakeBase):
     print("---- Basis: ", self.e_base, "--------- Seed: ", RSEED)
     starttime = time.time()
     # self.array(self.size)
-    self.lattice()
+    #self.lattice()
     self.make_seed()
     self.candidate_check(check='seed')
     self.probability()
@@ -457,6 +485,11 @@ class Flake(FlakeBase):
     print("Lattice Dimensions:", self.size, "x", self.size, "x", self.size)
     print("Initialized in ", self.inittime, "seconds.")
     print("-------------------------------")
+
+  def test_main(self):
+    self.grid.populate()
+    self.grid.make_seed()
+    self.plot()
 
   def main(self):
     """ main logic loop """
